@@ -314,7 +314,7 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="name">Pranav Joshipura</h1>
-                <h2 class="title">Chief Technology Officer | Chief Digital Officer</h2>
+                <h2 class="title"> Senior Technology Leader | AI & Engineering Executive</h2>
                 <p class="summary">
                     Accomplished digital transformation leader with over <b>25 years</b></span> of executive experience leveraging cloud, AI, and modern software practices to evolve legacy systems into scalable platforms that deliver measurable business outcomes. Extensive experience with large-scale engineering leadership, global team management, P&L responsibility, and strategic technology vision.
                 </p>
