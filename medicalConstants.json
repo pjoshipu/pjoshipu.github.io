@@ -1,0 +1,64 @@
+{
+  "aiInsights": {
+    "vitals": "Your blood pressure is within normal range, but trending slightly higher compared to your last three readings. Consider monitoring more frequently and adding 10-20 minutes of daily meditation to help maintain healthy levels.",
+    "medications": "Your medications are working well together with no known interactions. Simvastatin is effectively managing your cholesterol. Current research suggests taking it consistently at the same time each evening for best results.",
+    "allergies": "Your shellfish allergy may cause cross-reactions with iodine contrast agents. Always inform radiology staff about this allergy before imaging procedures.",
+    "labResults": "Your cholesterol levels show improvement from your last test. Continue your current diet modifications and exercise routine. Research shows adding omega-3 fatty acids may further improve your HDL levels.",
+    "appointments": "Regular follow-ups like your upcoming appointment are associated with better long-term health outcomes for patients managing hypertension."
+  },
+  "lifestyleRecommendations": {
+    "vitals": [
+      "Incorporate 30 minutes of moderate exercise 5 days a week to help maintain healthy blood pressure",
+      "Consider the DASH diet which has been shown to reduce blood pressure by up to 11 points",
+      "Reduce sodium intake to less than 2,300mg daily"
+    ],
+    "medications": [
+      "Take medications at consistent times daily to maintain steady blood levels",
+      "Avoid grapefruit with your statins as it can increase side effect risks",
+      "Monitor for muscle pain or weakness, which can be side effects of simvastatin"
+    ],
+    "allergies": [
+      "Read food labels carefully, especially for processed foods that may contain shellfish derivatives",
+      "Consider wearing a medical alert bracelet to inform others of your penicillin allergy",
+      "When traveling, learn how to communicate your allergies in the local language"
+    ],
+    "labResults": [
+      "Increase soluble fiber intake to help further reduce LDL cholesterol",
+      "Include plant sterols/stanols in your diet (found in special margarines and supplements)",
+      "Limit saturated fats to less than 7% of daily calories to maintain improvements"
+    ],
+    "appointments": [
+      "Prepare questions in advance for more productive appointments",
+      "Bring a complete list of all medications and supplements to each visit",
+      "Consider keeping a symptom journal to share with your provider"
+    ]
+  },
+  "structuredLabResults": [
+    {
+      "id": "chol-1",
+      "name": "Cholesterol Panel — Total",
+      "date": "April 15, 2025",
+      "currentValue": 180,
+      "previousValue": 195,
+      "unit": "mg/dL",
+      "normalRange": { "min": 0, "max": 200 }
+    },
+    {
+      "id": "glucose-1",
+      "name": "Blood Glucose — Fasting",
+      "date": "April 15, 2025",
+      "currentValue": 95,
+      "previousValue": 93,
+      "unit": "mg/dL",
+      "normalRange": { "min": 70, "max": 99 }
+    },
+    {
+      "id": "covid-1",
+      "name": "SARS-COV-2 RNA, QL NAAT, RT PCR/TMA (COVID-19)",
+      "date": "March 10, 2025",
+      "currentValue": null,
+      "previousValue": null,
+      "qualitative": "Negative"
+    }
+  ]
+}
