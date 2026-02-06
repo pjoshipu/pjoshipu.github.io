@@ -461,4 +461,178 @@
                         <div class="award-org">State of Georgia Leadership</div>
                     </div>
                     <div class="award-item">
-                        <div class="award-title">Pinnacle Award and Cloud Transformation Award</di
+                        <div class="award-title">Pinnacle Award and Cloud Transformation Award</div>
+                        <div class="award-org">Optum/Change Healthcare</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Floating Chat Widget -->
+    <div id="chat-widget">
+        <!-- Chat Button -->
+        <div id="chat-button" onclick="toggleChat()">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span id="chat-tooltip">Chat with my AI Avatar!</span>
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chat-window">
+            <div id="chat-header">
+                <div>
+                    <h3 style="margin: 0; font-size: 18px;">💬 AI Avatar</h3>
+                    <p style="margin: 0; font-size: 12px; opacity: 0.9;">Ask me anything!</p>
+                </div>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0; width: 30px; height: 30px;">×</button>
+            </div>
+            <div id="chat-body">
+                <iframe
+                    src="https://pjoshipura-avatar.hf.space"
+                    frameborder="0"
+                    width="100%"
+                    height="100%"
+                    style="border: none;"
+                    allow="microphone"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        #chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a365d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.6);
+        }
+
+        #chat-button:hover #chat-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #chat-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #1a365d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        #chat-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 8px solid #1a365d;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        #chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 450px;
+            height: 700px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+
+        #chat-window.open {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #chat-header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-body {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            #chat-window {
+                width: calc(100vw - 40px);
+                height: calc(100vh - 120px);
+                right: 20px;
+                bottom: 90px;
+            }
+
+            #chat-tooltip {
+                display: none;
+            }
+        }
+    </style>
+
+    <script>
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.classList.toggle('open');
+        }
+
+        // Close chat when clicking outside
+        document.addEventListener('click', function(event) {
+            const chatWidget = document.getElementById('chat-widget');
+            const chatWindow = document.getElementById('chat-window');
+
+            if (!chatWidget.contains(event.target) && chatWindow.classList.contains('open')) {
+                chatWindow.classList.remove('open');
+            }
+        });
+    </script>
+
+</body>
+</html>
