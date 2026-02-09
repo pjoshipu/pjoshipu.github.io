@@ -579,12 +579,13 @@
     <!-- Floating Projects Menu -->
     <div id="projects-menu">
         <div id="projects-button" onclick="toggleProjects()">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                 <rect x="3" y="3" width="7" height="7" rx="1"></rect>
                 <rect x="14" y="3" width="7" height="7" rx="1"></rect>
                 <rect x="14" y="14" width="7" height="7" rx="1"></rect>
                 <rect x="3" y="14" width="7" height="7" rx="1"></rect>
             </svg>
+            <span style="color: white; font-size: 11px; font-weight: 600; letter-spacing: 2px; margin-top: 5px;">AI</span>
             <span id="projects-tooltip">AI Projects</span>
         </div>
         <div id="projects-dropdown">
@@ -717,28 +718,39 @@
         /* Projects Menu */
         #projects-menu {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 1000;
         }
 
         #projects-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6c63ff 0%, #4834df 100%);
+            width: 50px;
+            height: 140px;
+            border-radius: 0 25px 25px 0;
+            background: linear-gradient(180deg, #6c63ff 0%, #4834df 100%);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+            box-shadow: 2px 0 15px rgba(108, 99, 255, 0.4);
             transition: all 0.3s ease;
             position: relative;
+            padding: 15px 8px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
         }
 
         #projects-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.6);
+            width: 60px;
+            box-shadow: 4px 0 25px rgba(108, 99, 255, 0.6);
+        }
+
+        #projects-button svg {
+            writing-mode: horizontal-tb;
+            transform: rotate(0deg);
         }
 
         #projects-button:hover #projects-tooltip {
@@ -748,7 +760,9 @@
 
         #projects-tooltip {
             position: absolute;
-            left: 70px;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
             background: #4834df;
             color: white;
             padding: 8px 15px;
@@ -759,6 +773,7 @@
             transition: all 0.3s ease;
             font-size: 14px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            writing-mode: horizontal-tb;
         }
 
         #projects-tooltip::after {
@@ -774,16 +789,28 @@
 
         #projects-dropdown {
             position: absolute;
-            bottom: 70px;
-            left: 0;
+            left: 55px;
+            top: 50%;
+            transform: translateY(-50%);
             background: white;
             border-radius: 15px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
             display: none;
             flex-direction: column;
             overflow: hidden;
-            min-width: 200px;
-            animation: slideUp 0.3s ease;
+            min-width: 220px;
+            animation: slideLeft 0.3s ease;
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
         }
 
         #projects-dropdown.open {
