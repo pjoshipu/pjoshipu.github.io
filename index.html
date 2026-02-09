@@ -531,13 +531,13 @@
                         <div class="project-icon">🤖</div>
                         <div class="project-title">AI Avatar Chatbot</div>
                         <div class="project-description">Interactive AI assistant that answers questions about my background, experience, and skills. Built with OpenAI GPT-4o-mini and Gradio.</div>
-                        <a href="https://pjoshipura-avatar.hf.space" target="_blank" class="project-link">Try it Live →</a>
+                        <a href="ai-avatar.html" class="project-link">Try it Live →</a>
                     </div>
                     <div class="project-item">
                         <div class="project-icon">🔬</div>
                         <div class="project-title">Deep Research AI</div>
                         <div class="project-description">Multi-agent research system that plans searches, gathers information from the web, synthesizes comprehensive reports, and delivers via email. Built with OpenAI Agents SDK.</div>
-                        <a href="https://huggingface.co/spaces/pjoshipura/Deep_Research" target="_blank" class="project-link">Try it Live →</a>
+                        <a href="deep-research.html" class="project-link">Try it Live →</a>
                     </div>
                 </div>
             </section>
@@ -573,6 +573,29 @@
                     allow="microphone"
                 ></iframe>
             </div>
+        </div>
+    </div>
+
+    <!-- Floating Projects Menu -->
+    <div id="projects-menu">
+        <div id="projects-button" onclick="toggleProjects()">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            </svg>
+            <span id="projects-tooltip">AI Projects</span>
+        </div>
+        <div id="projects-dropdown">
+            <a href="ai-avatar.html" class="project-menu-item">
+                <span class="project-menu-icon">🤖</span>
+                <span class="project-menu-text">AI Avatar</span>
+            </a>
+            <a href="deep-research.html" class="project-menu-item">
+                <span class="project-menu-icon">🔬</span>
+                <span class="project-menu-text">Deep Research</span>
+            </a>
         </div>
     </div>
 
@@ -690,6 +713,117 @@
                 display: none;
             }
         }
+
+        /* Projects Menu */
+        #projects-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        #projects-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6c63ff 0%, #4834df 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #projects-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.6);
+        }
+
+        #projects-button:hover #projects-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #projects-tooltip {
+            position: absolute;
+            left: 70px;
+            background: #4834df;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        #projects-tooltip::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right: 8px solid #4834df;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        #projects-dropdown {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 200px;
+            animation: slideUp 0.3s ease;
+        }
+
+        #projects-dropdown.open {
+            display: flex;
+        }
+
+        .project-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .project-menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-menu-item:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            transform: translateX(5px);
+        }
+
+        .project-menu-icon {
+            font-size: 1.5rem;
+        }
+
+        .project-menu-text {
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        @media (max-width: 768px) {
+            #projects-tooltip {
+                display: none;
+            }
+        }
     </style>
 
     <script>
@@ -705,6 +839,21 @@
 
             if (!chatWidget.contains(event.target) && chatWindow.classList.contains('open')) {
                 chatWindow.classList.remove('open');
+            }
+        });
+
+        function toggleProjects() {
+            const projectsDropdown = document.getElementById('projects-dropdown');
+            projectsDropdown.classList.toggle('open');
+        }
+
+        // Close projects menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const projectsMenu = document.getElementById('projects-menu');
+            const projectsDropdown = document.getElementById('projects-dropdown');
+
+            if (!projectsMenu.contains(event.target) && projectsDropdown.classList.contains('open')) {
+                projectsDropdown.classList.remove('open');
             }
         });
     </script>
