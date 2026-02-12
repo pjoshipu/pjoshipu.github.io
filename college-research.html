@@ -64,153 +64,139 @@
             font-style: italic;
         }
 
-        .info-toggle {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 10px 20px;
+        .app-container {
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .launch-container {
+            background: white;
             border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-family: 'Georgia', serif;
-            font-size: 0.9rem;
-            cursor: pointer;
+            padding: 60px 80px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 800px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .app-name {
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .app-tagline {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #2c5aa0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            border-radius: 12px;
             transition: all 0.3s ease;
         }
 
-        .info-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.2);
         }
 
-        .main-content {
-            width: 100%;
-            height: calc(100vh - 80px);
-            position: relative;
-        }
-
-        .app-container {
-            width: 100%;
-            height: 100%;
-            background: white;
-        }
-
-        .app-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .info-panel {
-            position: absolute;
-            top: 0;
-            right: -480px;
-            width: 480px;
-            height: 100%;
-            background: white;
-            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
-            transition: right 0.3s ease;
-            overflow-y: auto;
-            z-index: 10;
-        }
-
-        .info-panel.open {
-            right: 0;
-        }
-
-        .info-content {
-            padding: 30px;
-        }
-
-        .info-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
+        .feature-icon {
             font-size: 1.5rem;
-            cursor: pointer;
-            color: #6c757d;
         }
 
-        .info-section-title {
-            font-size: 1.4rem;
-            color: #1a365d;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .agent-card {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border-left: 4px solid #2c5aa0;
-        }
-
-        .agent-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #1a365d;
-            margin-bottom: 6px;
-        }
-
-        .agent-role {
-            font-size: 0.85rem;
-            color: #6c757d;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .agent-desc {
-            font-size: 0.9rem;
-            color: #2c3e50;
-            line-height: 1.5;
-        }
-
-        .task-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border-left: 4px solid #ffd700;
-        }
-
-        .task-name {
-            font-weight: 700;
-            color: #1a365d;
-            margin-bottom: 6px;
-        }
-
-        .task-desc {
-            font-size: 0.85rem;
-            color: #2c3e50;
-            line-height: 1.5;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .tech-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f4ff 100%);
-            border-radius: 8px;
-            font-size: 0.85rem;
+        .feature-text {
             color: #2c3e50;
             font-weight: 500;
         }
 
-        .tech-icon {
-            font-size: 1.1rem;
+        .feature-sub {
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 400;
+            margin-top: 2px;
         }
 
-        .section-gap {
-            margin-top: 28px;
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a365d 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .launch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(44, 90, 160, 0.4);
+        }
+
+        .tech-stack {
+            color: #6c757d;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -229,13 +215,25 @@
                 font-size: 0.9rem;
             }
 
-            .info-panel {
-                width: 100%;
-                right: -100%;
+            .app-container {
+                padding: 20px;
             }
 
-            .tech-grid {
+            .launch-container {
+                padding: 40px 30px;
+            }
+
+            .app-name {
+                font-size: 2rem;
+            }
+
+            .feature-list {
                 grid-template-columns: 1fr;
+            }
+
+            .launch-btn {
+                font-size: 1rem;
+                padding: 15px 30px;
             }
         }
     </style>
@@ -251,94 +249,61 @@
                 <div class="project-subtitle">Multi-agent AI research system powered by CrewAI</div>
             </div>
         </div>
-        <button class="info-toggle" onclick="toggleInfo()">How It Works</button>
     </div>
 
-    <div class="main-content">
-        <div class="app-container">
-            <iframe src="https://pjoshipura-college-research-crew.hf.space" allow="microphone"></iframe>
-        </div>
+    <div class="app-container">
+        <div class="launch-container">
+            <div class="app-icon">🎓</div>
+            <h1 class="app-name">College Research Crew</h1>
+            <p class="app-tagline">Multi-Agent College Research System</p>
 
-        <div class="info-panel" id="info-panel">
-            <button class="info-close" onclick="toggleInfo()">&times;</button>
-            <div class="info-content">
-                <h2 class="info-section-title">How It Works</h2>
-                <p style="color: #2c3e50; line-height: 1.6; margin-bottom: 20px;">
-                    This project uses CrewAI to orchestrate two AI agents that work together sequentially.
-                    Enter a research topic, and the agents collaborate to produce a ranked college report.
-                </p>
-
-                <h3 class="info-section-title section-gap">AI Agents</h3>
-
-                <div class="agent-card">
-                    <div class="agent-name">Researcher</div>
-                    <div class="agent-role">High School Student Researching Colleges</div>
-                    <div class="agent-desc">
-                        Searches the web for top colleges offering strong Computer Science programs.
-                        Investigates rankings, admission requirements, faculty quality, research
-                        opportunities, internship pipelines, and CS specialties like AI, cybersecurity,
-                        and data science.
+            <div class="section-label">AI Agents</div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <div>
+                        <div class="feature-text">Researcher Agent</div>
+                        <div class="feature-sub">Searches web for college rankings, programs & opportunities</div>
                     </div>
                 </div>
-
-                <div class="agent-card">
-                    <div class="agent-name">Reporting Analyst</div>
-                    <div class="agent-role">College Rankings Analyst</div>
-                    <div class="agent-desc">
-                        Takes the research findings and organizes colleges into a ranked report
-                        grouped by tier (Top Tier, Strong, Up-and-Coming). Highlights which CS
-                        subjects each school excels in, making it easy to compare options at a glance.
-                    </div>
-                </div>
-
-                <h3 class="info-section-title section-gap">Tasks</h3>
-
-                <div class="task-card">
-                    <div class="task-name">Research Task</div>
-                    <div class="task-desc">
-                        Conduct thorough research on the given topic. Find top colleges with strong CS
-                        programs, including rankings, CS specialties, notable strengths, and standout features.
-                    </div>
-                </div>
-
-                <div class="task-card">
-                    <div class="task-name">Reporting Task</div>
-                    <div class="task-desc">
-                        Review all research findings and produce a concise ranked report organized by tier,
-                        with each entry showing rank, CS subject strengths, and a summary of why it stands out.
-                    </div>
-                </div>
-
-                <h3 class="info-section-title section-gap">Technologies Used</h3>
-
-                <div class="tech-grid">
-                    <div class="tech-item">
-                        <span class="tech-icon">🤖</span> CrewAI
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-icon">🌐</span> Flask
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-icon">🔍</span> SerperDev API
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-icon">💡</span> OpenAI GPT-4.1 Mini
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-icon">🧠</span> Anthropic Claude
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-icon">🐍</span> Python
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <div>
+                        <div class="feature-text">Reporting Analyst Agent</div>
+                        <div class="feature-sub">Organizes findings into tiered reports by subject strength</div>
                     </div>
                 </div>
             </div>
+
+            <div class="section-label">Tasks</div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <div>
+                        <div class="feature-text">Research Task</div>
+                        <div class="feature-sub">Finds top CS colleges, specialties, faculty & admission data</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <div>
+                        <div class="feature-text">Reporting Task</div>
+                        <div class="feature-sub">Creates ranked report by tier: Top, Strong & Up-and-Coming</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://pjoshipura-college-research-crew.hf.space" target="_blank" class="launch-btn">
+                <span>Launch College Research Crew</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+
+            <p class="tech-stack">Built with CrewAI, Flask, SerperDev, OpenAI GPT-4.1 Mini & Anthropic Claude</p>
         </div>
     </div>
-
-    <script>
-        function toggleInfo() {
-            document.getElementById('info-panel').classList.toggle('open');
-        }
-    </script>
 </body>
 </html>
