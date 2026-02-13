@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDLC Pipeline CrewAI - Pranav Joshipura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 100%);
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: white;
+            color: #1a365d;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .project-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+
+        .project-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .app-container {
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .launch-container {
+            background: white;
+            border-radius: 25px;
+            padding: 60px 80px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 1000px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .app-name {
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .app-tagline {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #2c5aa0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .feature-list.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+
+        .feature-text {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .feature-sub {
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a365d 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .launch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(44, 90, 160, 0.4);
+        }
+
+        .tech-stack {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .project-title {
+                font-size: 1.3rem;
+            }
+
+            .back-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .app-container {
+                padding: 20px;
+            }
+
+            .launch-container {
+                padding: 40px 30px;
+            }
+
+            .app-name {
+                font-size: 2rem;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-list.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .launch-btn {
+                font-size: 1rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <span>&larr;</span> Back to Portfolio
+            </a>
+            <div>
+                <div class="project-title">🏗️ SDLC Pipeline CrewAI</div>
+                <div class="project-subtitle">AI-powered software development lifecycle automation with 7 specialized crews</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="launch-container">
+            <div class="app-icon">🏗️</div>
+            <h1 class="app-name">SDLC Pipeline CrewAI</h1>
+            <p class="app-tagline">End-to-End SDLC Automation — 14 AI Agents across 7 Specialized Crews</p>
+
+            <div class="section-label">7 Specialized Crews</div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <div>
+                        <div class="feature-text">1. Requirements & Decomposition</div>
+                        <div class="feature-sub">Product Manager, Solutions Architect, Estimation Specialist</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <div>
+                        <div class="feature-text">2. Code Review & Architecture</div>
+                        <div class="feature-sub">Code Reviewer, Architecture Guardian</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🧪</span>
+                    <div>
+                        <div class="feature-text">3. Test Generation & QA</div>
+                        <div class="feature-sub">Test Automation Engineer, QA Analyst</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <div>
+                        <div class="feature-text">4. Security & Compliance</div>
+                        <div class="feature-sub">Security Analyst, Compliance Officer (HIPAA/SOC2)</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚨</span>
+                    <div>
+                        <div class="feature-text">5. Failure RCA & Incident</div>
+                        <div class="feature-sub">SRE Log Analyst, Incident Commander</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚀</span>
+                    <div>
+                        <div class="feature-text">6. Release Decision</div>
+                        <div class="feature-sub">Risk Assessor, Release Manager</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">☁️</span>
+                    <div>
+                        <div class="feature-text">7. Infrastructure Drift</div>
+                        <div class="feature-sub">Drift Detector, Remediation Engineer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-label">Key Capabilities</div>
+            <div class="feature-list three-col">
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <div>
+                        <div class="feature-text">Epic Decomposition</div>
+                        <div class="feature-sub">GWT acceptance criteria & Jira stories</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <div>
+                        <div class="feature-text">Fibonacci Estimation</div>
+                        <div class="feature-sub">Story points with spike identification</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <div>
+                        <div class="feature-text">HIPAA/SOC2 Gates</div>
+                        <div class="feature-sub">Healthcare compliance enforcement</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📈</span>
+                    <div>
+                        <div class="feature-text">Risk Scoring</div>
+                        <div class="feature-sub">Composite GO/CONDITIONAL/NO_GO</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔧</span>
+                    <div>
+                        <div class="feature-text">Terraform Drift</div>
+                        <div class="feature-sub">Auto-remediation with escalation</div>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📑</span>
+                    <div>
+                        <div class="feature-text">RCA Reports</div>
+                        <div class="feature-sub">5-Whys root cause analysis</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://pjoshipura-sdlc-pipeline.hf.space" target="_blank" class="launch-btn">
+                <span>Launch SDLC Pipeline</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+
+            <p class="tech-stack">Built with CrewAI, Gradio, OpenAI GPT-4.1 Nano & Python</p>
+        </div>
+    </div>
+</body>
+</html>
