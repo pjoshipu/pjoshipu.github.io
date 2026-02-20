@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDLC Orchestrator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d1b69 100%);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      margin-right: 12px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #475569;
+      color: #94a3b8;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 48px;
+      color: #f1f5f9;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #6366f1; }
+
+    .card-icon { font-size: 2rem; margin-bottom: 16px; }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 10px;
+    }
+
+    .card p { color: #94a3b8; line-height: 1.6; }
+
+    .chat-demo {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .message {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .avatar.user { background: #3b82f6; }
+    .avatar.ai { background: #8b5cf6; }
+
+    .bubble {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 14px 18px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      flex: 1;
+    }
+
+    .bubble.user { background: #1e3a5f; }
+
+    .tag {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #60a5fa;
+      border: 1px solid #2563eb;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .arch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .arch-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .arch-box strong { display: block; color: #f1f5f9; font-size: 1rem; margin-bottom: 4px; }
+    .arch-arrow { color: #6366f1; font-size: 1.5rem; }
+
+    footer {
+      background: #0a0f1a;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      padding: 32px 24px;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    footer a { color: #6366f1; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🚀 SDLC Orchestrator</h1>
+    <p>
+      An AI-powered assistant that manages your Jira and GitHub workflows
+      through natural conversation — no forms, no clicking around.
+    </p>
+    <a href="https://huggingface.co/spaces/pjoshipura/sdlc-orchestrator" class="btn btn-primary" target="_blank">
+      Try it Live →
+    </a>
+    <a href="https://github.com/pjoshipu/MCP-Server" class="btn btn-secondary" target="_blank">
+      View on GitHub
+    </a>
+  </header>
+
+  <section>
+    <h2 class="section-title">What it does</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Jira Integration</h3>
+        <p>Search issues with JQL, create tickets, update fields, transition statuses, and add comments — all by just asking.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🐙</div>
+        <h3>GitHub Integration</h3>
+        <p>List repositories, view and create pull requests, track issues — connected to your real repos in real time.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Cross-Tool Workflows</h3>
+        <p>Create a full feature workflow — Jira Epic + draft GitHub PR — with a single sentence. Or check if a Jira issue and PR are in sync.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <h2 class="section-title">See it in action</h2>
+    <div class="chat-demo">
+      <div class="message">
+        <div class="avatar user">👤</div>
+        <div class="bubble user">Create a feature workflow for user authentication in my PROJ project and my-app repo</div>
+      </div>
+      <div class="message">
+        <div class="avatar ai">🤖</div>
+        <div class="bubble">
+          <span class="tag">jira_create_issue</span> <span class="tag">github_create_pr</span> <span class="tag">jira_comment</span>
+          <br><br>
+          Done! Here's what I created:<br><br>
+          • <strong>Jira Epic:</strong> PROJ-12 — User Authentication<br>
+          • <strong>GitHub PR:</strong> #8 — [PROJ-12] User Authentication (draft)<br>
+          • Linked the PR in the Jira epic as a comment<br><br>
+          The branch <code>feature/proj-12-user-authentication</code> is ready for you to start working on.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <h2 class="section-title">Architecture</h2>
+    <div class="arch">
+      <div class="arch-box"><strong>You</strong>Natural language</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><strong>Gradio UI</strong>HF Spaces</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><strong>Claude AI</strong>Tool selection</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><strong>MCP Server</strong>Azure Functions</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><strong>Jira / GitHub</strong>APIs</div>
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/pjoshipu">Pranav Joshipura</a> ·
+    <a href="https://huggingface.co/spaces/pjoshipura/sdlc-orchestrator">Live Demo</a> ·
+    <a href="https://github.com/pjoshipu/MCP-Server">GitHub</a>
+  </footer>
+
+</body>
+</html>
