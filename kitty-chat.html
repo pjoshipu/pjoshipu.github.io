@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitty — Personal AI Agent | Pranav Joshipura</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 100%);
+            color: white;
+            padding: 40px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            transform: translate(100px, -100px);
+        }
+
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: white; }
+
+        .header-content { position: relative; z-index: 2; }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* Tech stack badges */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Main content */
+        .main-content { padding: 50px; }
+
+        /* Architecture section */
+        .architecture {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .architecture h2 {
+            color: #1a365d;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .arch-node {
+            background: white;
+            border: 2px solid #2c5aa0;
+            border-radius: 10px;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a365d;
+            box-shadow: 0 4px 12px rgba(44,90,160,0.1);
+        }
+
+        .arch-node .node-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+
+        .arch-arrow {
+            color: #2c5aa0;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        /* Channels grid */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .channel-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(44,90,160,0.2);
+        }
+
+        .channel-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .channel-name { font-weight: 600; color: #1a365d; margin-bottom: 5px; }
+        .channel-status {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .status-live { background: #d4edda; color: #155724; }
+        .status-coming { background: #fff3cd; color: #856404; }
+
+        /* Chat demo section */
+        .chat-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chat-demo {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chat-demo-header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-demo-header .avatar {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .chat-demo-header .info .name { font-weight: 600; font-size: 0.95rem; }
+        .chat-demo-header .info .status { font-size: 0.75rem; opacity: 0.8; }
+
+        .chat-messages {
+            padding: 20px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .msg.user {
+            background: #2c5aa0;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg.kitty {
+            background: white;
+            color: #2c3e50;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 100%);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h2 { font-size: 1.8rem; font-weight: 300; margin-bottom: 10px; }
+        .cta-section p { opacity: 0.9; margin-bottom: 25px; font-size: 1rem; }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+        .cta-btn.telegram {
+            background: #229ED9;
+            color: white;
+        }
+
+        .cta-btn.github {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        /* Section title */
+        .section-title {
+            color: #1a365d;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-left: 4px solid #2c5aa0;
+            padding-left: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 30px 20px; }
+            .main-content { padding: 25px 20px; }
+            .header h1 { font-size: 2rem; }
+            .chat-section { grid-template-columns: 1fr; }
+            .arch-flow { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            <div class="project-badge">🦞 OpenClaw Personal Agent</div>
+            <h1>Kitty — Personal AI Agent</h1>
+            <p>An always-on personal AI assistant built with OpenClaw, running across multiple channels from a self-hosted gateway. Powered by Claude (Anthropic), Kitty handles conversations, reminders, and tasks — available on WebChat and Telegram.</p>
+            <div class="tech-stack">
+                <span class="tech-badge">OpenClaw</span>
+                <span class="tech-badge">Claude (Anthropic)</span>
+                <span class="tech-badge">Telegram Bot API</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">WebChat</span>
+                <span class="tech-badge">GitHub Codespaces</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <!-- Architecture -->
+        <div class="architecture">
+            <h2>How It Works</h2>
+            <div class="arch-flow">
+                <div class="arch-node">
+                    <span class="node-icon">💬</span>
+                    User Message
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <span class="node-icon">📡</span>
+                    Channel<br><small>(Telegram / WebChat)</small>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <span class="node-icon">🦞</span>
+                    OpenClaw<br>Gateway
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <span class="node-icon">🤖</span>
+                    Claude AI<br><small>(claude-sonnet-4-6)</small>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <span class="node-icon">✅</span>
+                    Response
+                </div>
+            </div>
+            <p style="color:#495057; font-size:0.95rem; line-height:1.7;">OpenClaw acts as a local-first gateway that routes messages from any connected channel to the Claude AI model, maintains session context, and delivers responses back — all from a single self-hosted instance.</p>
+        </div>
+
+        <!-- Active Channels -->
+        <h2 class="section-title">Active Channels</h2>
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-icon">🌐</div>
+                <div class="channel-name">WebChat</div>
+                <div style="font-size:0.85rem; color:#666; margin: 6px 0;">Browser-based chat UI hosted on the OpenClaw gateway</div>
+                <span class="channel-status status-live">Live</span>
+            </div>
+            <div class="channel-card">
+                <div class="channel-icon">✈️</div>
+                <div class="channel-name">Telegram</div>
+                <div style="font-size:0.85rem; color:#666; margin: 6px 0;">@joshipurabot — chat directly or add to groups</div>
+                <span class="channel-status status-live">Live</span>
+            </div>
+            <div class="channel-card">
+                <div class="channel-icon">💼</div>
+                <div class="channel-name">MS Teams</div>
+                <div style="font-size:0.85rem; color:#666; margin: 6px 0;">Azure Bot integration for Teams channels</div>
+                <span class="channel-status status-coming">Coming Soon</span>
+            </div>
+            <div class="channel-card">
+                <div class="channel-icon">📱</div>
+                <div class="channel-name">WhatsApp</div>
+                <div style="font-size:0.85rem; color:#666; margin: 6px 0;">Personal DMs via linked device</div>
+                <span class="channel-status status-live">Live</span>
+            </div>
+        </div>
+
+        <!-- Sample Conversations -->
+        <h2 class="section-title">Sample Conversations</h2>
+        <div class="chat-section">
+            <div class="chat-demo">
+                <div class="chat-demo-header">
+                    <div class="avatar">🦞</div>
+                    <div class="info">
+                        <div class="name">Kitty</div>
+                        <div class="status">● Online via Telegram</div>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="msg user">What can you help me with?</div>
+                    <div class="msg kitty">I'm Kitty, your personal AI assistant! I can help you with questions, research, writing, reminders, coding problems, or just a friendly chat. What's on your mind?</div>
+                    <div class="msg user">Remind me to review the project at 3pm</div>
+                    <div class="msg kitty">Got it! I'll remind you to review the project at 3:00 PM today. Is there anything specific you'd like me to include in the reminder?</div>
+                </div>
+            </div>
+            <div class="chat-demo">
+                <div class="chat-demo-header">
+                    <div class="avatar">🦞</div>
+                    <div class="info">
+                        <div class="name">Kitty</div>
+                        <div class="status">● Online via WebChat</div>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="msg user">Explain OpenClaw in one sentence</div>
+                    <div class="msg kitty">OpenClaw is a self-hosted personal AI assistant gateway that connects any AI model to all your messaging channels — WhatsApp, Telegram, Teams, and more — from a single running instance.</div>
+                    <div class="msg user">What model are you using?</div>
+                    <div class="msg kitty">I'm powered by Claude claude-sonnet-4-6 from Anthropic — one of the most capable AI models available, great for nuanced conversation, coding, analysis, and creative tasks.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Chat with Kitty</h2>
+            <p>Start a conversation directly on Telegram — no setup required.</p>
+            <div class="cta-buttons">
+                <a href="https://t.me/joshipurabot" target="_blank" class="cta-btn telegram">
+                    ✈️ Chat on Telegram
+                </a>
+                <a href="https://github.com/openclaw/openclaw" target="_blank" class="cta-btn github">
+                    🦞 View OpenClaw on GitHub
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
