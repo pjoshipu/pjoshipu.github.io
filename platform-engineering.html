@@ -1,0 +1,502 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI in Platform Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            transform: translate(100px, -100px);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .demo-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a365d;
+            padding: 14px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .demo-button:hover {
+            background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .main-content {
+            padding: 50px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #1a365d;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            position: relative;
+            font-weight: 300;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #ffd700;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .agent-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #2c5aa0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.1);
+        }
+
+        .agent-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(44, 90, 160, 0.2);
+        }
+
+        .agent-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .agent-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #1a365d;
+            margin-bottom: 12px;
+        }
+
+        .agent-description {
+            color: #495057;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .agent-features {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .agent-features li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #6c757d;
+        }
+
+        .agent-features li:before {
+            content: '✓';
+            color: #2c5aa0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .features-list {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .features-list h3 {
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .features-list ul {
+            list-style: none;
+            columns: 2;
+            gap: 30px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #495057;
+            break-inside: avoid;
+        }
+
+        .features-list li:before {
+            content: '▸';
+            color: #2c5aa0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .tech-stack h3 {
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a365d 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2c5aa0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1a365d;
+            transform: translateX(-5px);
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 30px 25px;
+            }
+
+            .header {
+                padding: 40px 25px;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-list ul {
+                columns: 1;
+            }
+
+            .demo-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(1) .fade-in { animation-delay: 0.1s; }
+        .section:nth-child(2) .fade-in { animation-delay: 0.2s; }
+        .section:nth-child(3) .fade-in { animation-delay: 0.3s; }
+        .section:nth-child(4) .fade-in { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="project-title">⚙️ Agentic AI in Platform Engineering</h1>
+                <h2 class="project-subtitle">Multi-Agent AI System for Enterprise Platform Operations</h2>
+                <p class="project-description">
+                    A comprehensive platform showcasing 5 specialized AI agents built with Claude 3 Haiku and Python.
+                    These agents solve critical platform engineering challenges: CI/CD diagnostics, release readiness evaluation,
+                    multi-agent orchestration, developer onboarding, and personalized AI assistance. Includes interactive demos
+                    with architecture diagrams, workflow visualizations, and real-time agent interactions.
+                </p>
+                <a href="https://github.com/pjoshipu/platformengineering" class="demo-button" target="_blank">View on GitHub →</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <a href="index.html" class="back-link">Back to Portfolio</a>
+
+            <section class="section">
+                <h2 class="section-title fade-in">The 5 AI Agents</h2>
+
+                <div class="agents-grid fade-in">
+                    <div class="agent-card">
+                        <div class="agent-icon">🔍</div>
+                        <div class="agent-title">Workflow Diagnostic Agent</div>
+                        <div class="agent-description">
+                            Automatically analyzes failed CI/CD pipelines and provides root cause analysis with actionable fixes.
+                        </div>
+                        <ul class="agent-features">
+                            <li>Log analysis and pattern recognition</li>
+                            <li>Root cause identification</li>
+                            <li>Automated fix suggestions</li>
+                            <li>GitHub Actions integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-icon">✅</div>
+                        <div class="agent-title">Release Readiness Agent</div>
+                        <div class="agent-description">
+                            Evaluates quality gates across multiple metrics to make intelligent release/rollback decisions.
+                        </div>
+                        <ul class="agent-features">
+                            <li>Multi-metric quality assessment</li>
+                            <li>Risk-based decision making</li>
+                            <li>Progressive delivery strategies</li>
+                            <li>Automated rollback triggers</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-icon">🤝</div>
+                        <div class="agent-title">Multi-Agent Orchestration</div>
+                        <div class="agent-description">
+                            Specialized agents coordinate to handle cost optimization and incident response workflows.
+                        </div>
+                        <ul class="agent-features">
+                            <li>Agent coordination patterns</li>
+                            <li>Cost vs. performance trade-offs</li>
+                            <li>Incident triage and response</li>
+                            <li>Observability integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-icon">👨‍💻</div>
+                        <div class="agent-title">Developer Portal Agent</div>
+                        <div class="agent-description">
+                            Provides AI-powered developer onboarding with personalized guidance and service maturity insights.
+                        </div>
+                        <ul class="agent-features">
+                            <li>Personalized recommendations</li>
+                            <li>Service maturity assessment</li>
+                            <li>Golden path templates</li>
+                            <li>Developer productivity metrics</li>
+                        </ul>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-icon">🤖</div>
+                        <div class="agent-title">AI Copilot</div>
+                        <div class="agent-description">
+                            Your personal AI assistant for platform questions and development guidance with context-aware help.
+                        </div>
+                        <ul class="agent-features">
+                            <li>Context-aware assistance</li>
+                            <li>Experience-tailored guidance</li>
+                            <li>Real-time troubleshooting</li>
+                            <li>Best practices suggestions</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title fade-in">Key Platform Features</h2>
+
+                <div class="features-list fade-in">
+                    <h3>Core Capabilities</h3>
+                    <ul>
+                        <li>Interactive demo runner with live Claude 3 Haiku responses</li>
+                        <li>Real-time workflow visualization and architecture diagrams</li>
+                        <li>Multi-agent coordination and conversation flows</li>
+                        <li>Execution history tracking and run management</li>
+                        <li>Role-based access (Admin & Developer views)</li>
+                        <li>API key management from environment variables</li>
+                        <li>Response formatting with markdown support</li>
+                        <li>Search and filter capabilities</li>
+                        <li>Developer profile management</li>
+                        <li>Quality gate evaluation and release decision making</li>
+                        <li>Cost optimization scenarios</li>
+                        <li>Incident response coordination</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title fade-in">Technology Stack</h2>
+
+                <div class="tech-stack fade-in">
+                    <h3>Frontend</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React 19</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">TailwindCSS</span>
+                        <span class="tech-tag">React Router</span>
+                        <span class="tech-tag">React Query</span>
+                        <span class="tech-tag">Radix UI</span>
+                        <span class="tech-tag">Recharts</span>
+                    </div>
+
+                    <h3 style="margin-top: 25px;">Backend & AI</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Claude 3 Haiku API</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Anthropic SDK</span>
+                        <span class="tech-tag">Multi-Agent Architecture</span>
+                    </div>
+
+                    <h3 style="margin-top: 25px;">Infrastructure & Tools</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">GitHub Pages</span>
+                        <span class="tech-tag">GitHub Actions</span>
+                        <span class="tech-tag">Supabase</span>
+                        <span class="tech-tag">Environment Variables</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title fade-in">Getting Started</h2>
+
+                <div class="features-list fade-in">
+                    <h3>Local Development</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Courier New', monospace; font-size: 0.9rem; overflow-x: auto;">
+                        cd agentic-ai-platformengineering<br>
+                        npm install<br>
+                        npm run dev<br><br>
+                        # App runs on http://localhost:8080/platform/
+                    </div>
+
+                    <h3>Set API Key</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                        # Add to .env file:<br>
+                        VITE_ANTHROPIC_API_KEY=sk-ant-...
+                    </div>
+
+                    <h3>Deploy to GitHub Pages</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                        npm run build<br>
+                        npm run deploy
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="text-align: center; padding: 50px 0;">
+                <a href="https://github.com/pjoshipu/platformengineering" class="demo-button fade-in" target="_blank">Explore the Code on GitHub →</a>
+            </section>
+
+            <div style="text-align: center; color: #6c757d; margin-top: 50px; padding-top: 30px; border-top: 1px solid #dee2e6;">
+                <p>Built with ❤️ using Claude 3 Haiku and React | <a href="index.html" style="color: #2c5aa0; text-decoration: none;">Back to Portfolio</a></p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
